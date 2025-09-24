@@ -1,4 +1,4 @@
-package com.example.cleanandroidtemplate.ui.theme
+package com.androidcleantemplate.ui.theme
 
 import android.app.Activity
 import android.os.Build

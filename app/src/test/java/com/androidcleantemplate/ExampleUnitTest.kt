@@ -1,4 +1,4 @@
-package com.example.cleanandroidtemplate
+package com.androidcleantemplate
 
 import org.junit.Test
 
