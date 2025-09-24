@@ -20,4 +20,13 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "CleanAndroidTemplate"
+
+// Core modules (always present)
+include(":core:domain")
+include(":core:data")
+include(":core:presentation")
+include(":core:database")
+include(":core:networking")
+
+// Main app module
 include(":app")

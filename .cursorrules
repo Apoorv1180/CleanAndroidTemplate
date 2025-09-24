@@ -7,6 +7,12 @@
 - **Package**: com.androidcleantemplate (to be updated from com.example.cleanandroidtemplate)
 - **Current Phase**: Phase 1 - Foundation Setup
 
+## CRITICAL: Comprehensive Checklist Compliance
+- **MUST FOLLOW**: COMPREHENSIVE_CHECKLIST.md at every step
+- **Reference**: Always check checklist items before implementing any feature
+- **Validation**: Ensure all architectural rules are enforced
+- **Standards**: Follow the 20-item checklist for UI/Domain/Data layers
+
 ## Development Standards
 
 ### Code Style
