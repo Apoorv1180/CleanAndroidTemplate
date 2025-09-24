@@ -5,7 +5,6 @@ import com.androidcleantemplate.convention.ExtensionType
 import com.androidcleantemplate.convention.configureBuildTypes
 import com.androidcleantemplate.convention.configureKotlinAndroid
 import com.androidcleantemplate.convention.configureKotlinCompose
-import com.androidcleantemplate.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure

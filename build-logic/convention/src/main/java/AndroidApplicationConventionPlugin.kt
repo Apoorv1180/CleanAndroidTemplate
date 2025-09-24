@@ -4,7 +4,6 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.androidcleantemplate.convention.ExtensionType
 import com.androidcleantemplate.convention.configureBuildTypes
 import com.androidcleantemplate.convention.configureKotlinAndroid
-import com.androidcleantemplate.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -25,10 +24,10 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             }
             extensions.configure<ApplicationExtension> {
                 defaultConfig {
-                    applicationId = libs.findVersion("projectApplicationId").get().toString()
-                    targetSdk = libs.findVersion("projectTargetSdkVersion").get().toString().toInt()
-                    versionCode = libs.findVersion("projectVersionCode").get().toString().toInt()
-                    versionName = libs.findVersion("projectVersionName").get().toString()
+                    applicationId = "com.androidcleantemplate"
+                    targetSdk = 35
+                    versionCode = 1
+                    versionName = "1.0"
                 }
 
                 configureKotlinAndroid(this)

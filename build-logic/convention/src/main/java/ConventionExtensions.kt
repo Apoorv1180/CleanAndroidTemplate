@@ -2,9 +2,7 @@ package com.androidcleantemplate.convention
 
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.getByType
 
 /**
  * Extension type enum for different Android module types
@@ -15,22 +13,16 @@ enum class ExtensionType {
 }
 
 /**
- * Gets the version catalog from the project
- */
-internal val Project.libs
-    get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
-
-/**
  * Configures Kotlin Android settings
  */
 internal fun Project.configureKotlinAndroid(
     commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     commonExtension.apply {
-        compileSdk = libs.findVersion("projectCompileSdkVersion").get().toString().toInt()
+        compileSdk = 35
 
         defaultConfig {
-            minSdk = libs.findVersion("projectMinSdkVersion").get().toString().toInt()
+            minSdk = 26
         }
 
         compileOptions {
@@ -40,7 +32,7 @@ internal fun Project.configureKotlinAndroid(
     }
 
     dependencies {
-        add("implementation", libs.findLibrary("androidx-core-ktx").get())
+        add("implementation", "androidx.core:core-ktx:1.17.0")
     }
 }
 
@@ -56,19 +48,18 @@ internal fun Project.configureKotlinCompose(
         }
 
         composeOptions {
-            kotlinCompilerExtensionVersion = libs.findVersion("composeCompiler").get().toString()
+            kotlinCompilerExtensionVersion = "1.5.8"
         }
     }
 
     dependencies {
-        val composeBom = libs.findLibrary("androidx-compose-bom").get()
-        add("implementation", platform(composeBom))
-        add("implementation", libs.findLibrary("androidx-compose-ui").get())
-        add("implementation", libs.findLibrary("androidx-compose-ui-graphics").get())
-        add("implementation", libs.findLibrary("androidx-compose-ui-tooling-preview").get())
-        add("implementation", libs.findLibrary("androidx-compose-material3").get())
-        add("debugImplementation", libs.findLibrary("androidx-compose-ui-tooling").get())
-        add("debugImplementation", libs.findLibrary("androidx-compose-ui-test-manifest").get())
+        add("implementation", platform("androidx.compose:compose-bom:2024.09.00"))
+        add("implementation", "androidx.compose.ui:ui")
+        add("implementation", "androidx.compose.ui:ui-graphics")
+        add("implementation", "androidx.compose.ui:ui-tooling-preview")
+        add("implementation", "androidx.compose.material3:material3")
+        add("debugImplementation", "androidx.compose.ui:ui-tooling")
+        add("debugImplementation", "androidx.compose.ui:ui-test-manifest")
     }
 }
 

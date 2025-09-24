@@ -6,11 +6,11 @@ plugins {
 group = "com.androidcleantemplate.buildlogic"
 
 dependencies {
-    compileOnly(libs.android.gradlePlugin)
-    compileOnly(libs.android.tools.common)
-    compileOnly(libs.kotlin.gradlePlugin)
-    compileOnly(libs.ksp.gradlePlugin)
-    compileOnly(libs.room.gradlePlugin)
+    compileOnly("com.android.tools.build:gradle:8.3.2")
+    compileOnly("com.android.tools:common:31.8.0")
+    compileOnly("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21")
+    compileOnly("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:2.0.21-1.0.28")
+    compileOnly("androidx.room:room-gradle-plugin:2.6.1")
 }
 
 gradlePlugin {
