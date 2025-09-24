@@ -1,6 +1,7 @@
 package com.androidcleantemplate.convention
 
-import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
@@ -13,10 +14,10 @@ enum class ExtensionType {
 }
 
 /**
- * Configures Kotlin Android settings
+ * Configures Kotlin Android settings for Application modules
  */
 internal fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *>,
+    commonExtension: ApplicationExtension,
 ) {
     commonExtension.apply {
         compileSdk = 35
@@ -26,8 +27,8 @@ internal fun Project.configureKotlinAndroid(
         }
 
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = org.gradle.api.JavaVersion.VERSION_11
+            targetCompatibility = org.gradle.api.JavaVersion.VERSION_11
         }
     }
 
@@ -37,10 +38,34 @@ internal fun Project.configureKotlinAndroid(
 }
 
 /**
- * Configures Kotlin Compose settings
+ * Configures Kotlin Android settings for Library modules
+ */
+internal fun Project.configureKotlinAndroid(
+    commonExtension: LibraryExtension,
+) {
+    commonExtension.apply {
+        compileSdk = 35
+
+        defaultConfig {
+            minSdk = 26
+        }
+
+        compileOptions {
+            sourceCompatibility = org.gradle.api.JavaVersion.VERSION_11
+            targetCompatibility = org.gradle.api.JavaVersion.VERSION_11
+        }
+    }
+
+    dependencies {
+        add("implementation", "androidx.core:core-ktx:1.17.0")
+    }
+}
+
+/**
+ * Configures Kotlin Compose settings for Application modules
  */
 internal fun Project.configureKotlinCompose(
-    commonExtension: CommonExtension<*, *, *, *, *>,
+    commonExtension: ApplicationExtension,
 ) {
     commonExtension.apply {
         buildFeatures {
@@ -64,29 +89,71 @@ internal fun Project.configureKotlinCompose(
 }
 
 /**
- * Configures build types for different module types
+ * Configures Kotlin Compose settings for Library modules
+ */
+internal fun Project.configureKotlinCompose(
+    commonExtension: LibraryExtension,
+) {
+    commonExtension.apply {
+        buildFeatures {
+            compose = true
+        }
+
+        composeOptions {
+            kotlinCompilerExtensionVersion = "1.5.8"
+        }
+    }
+
+    dependencies {
+        add("implementation", platform("androidx.compose:compose-bom:2024.09.00"))
+        add("implementation", "androidx.compose.ui:ui")
+        add("implementation", "androidx.compose.ui:ui-graphics")
+        add("implementation", "androidx.compose.ui:ui-tooling-preview")
+        add("implementation", "androidx.compose.material3:material3")
+        add("debugImplementation", "androidx.compose.ui:ui-tooling")
+        add("debugImplementation", "androidx.compose.ui:ui-test-manifest")
+    }
+}
+
+/**
+ * Configures build types for Application modules
  */
 internal fun Project.configureBuildTypes(
-    commonExtension: CommonExtension<*, *, *, *, *>,
+    commonExtension: ApplicationExtension,
     extensionType: ExtensionType,
 ) {
     commonExtension.apply {
         buildTypes {
             debug {
                 isMinifyEnabled = false
-                if (extensionType == ExtensionType.APPLICATION) {
-                    isDebuggable = true
-                }
+                isDebuggable = true
             }
             release {
-                isMinifyEnabled = extensionType == ExtensionType.APPLICATION
-                if (extensionType == ExtensionType.APPLICATION) {
-                    isDebuggable = false
-                }
+                isMinifyEnabled = true
+                isDebuggable = false
                 proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
                 )
+            }
+        }
+    }
+}
+
+/**
+ * Configures build types for Library modules
+ */
+internal fun Project.configureBuildTypes(
+    commonExtension: LibraryExtension,
+    extensionType: ExtensionType,
+) {
+    commonExtension.apply {
+        buildTypes {
+            debug {
+                isMinifyEnabled = false
+            }
+            release {
+                isMinifyEnabled = false
             }
         }
     }
