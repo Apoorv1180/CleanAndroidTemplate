@@ -11,7 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.androidcleantemplate.ui.theme.CleanAndroidTemplateTheme
+import com.androidcleantemplate.core.presentation.components.RootContent
+import com.androidcleantemplate.core.presentation.navigation.BaseNavigation
+import com.androidcleantemplate.core.presentation.theme.CleanAndroidTemplateTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -29,12 +31,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CleanAndroidTemplateTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android Clean Template",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                BaseNavigation()
             }
         }
     }
@@ -52,6 +49,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     CleanAndroidTemplateTheme {
-        Greeting("Android Clean Template")
+        RootContent { modifier ->
+            Greeting("Android Clean Template", modifier = modifier.padding(16.dp))
+        }
     }
 }
