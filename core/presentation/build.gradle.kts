@@ -1,37 +1,7 @@
 plugins {
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-}
-
-android {
-    namespace = "com.androidcleantemplate.core.presentation"
-    compileSdk = 36
-
-    defaultConfig {
-        minSdk = 26
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    buildFeatures {
-        compose = true
-    }
+    alias(libs.plugins.androidcleantemplate.android.library.compose)
+    alias(libs.plugins.hilt.android)
+    kotlin("kapt")
 }
 
 dependencies {
@@ -49,6 +19,14 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+    
+    // Navigation
+    implementation(libs.navigation.compose)
+    
     // ViewModel
     implementation(libs.lifecycle.viewmodel.compose)
     
@@ -56,8 +34,12 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
     
+    // Image Loading
+    implementation(libs.coil.compose)
+    
     // Testing
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
