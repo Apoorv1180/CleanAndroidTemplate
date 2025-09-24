@@ -1,27 +1,29 @@
-package com.androidcleantemplate.convention
+
 
 import com.android.build.api.dsl.LibraryExtension
-import com.androidcleantemplate.convention.ExtensionType
-import com.androidcleantemplate.convention.configureBuildTypes
-import com.androidcleantemplate.convention.configureKotlinAndroid
+import ExtensionType
+import configureBuildTypes
+import configureKotlinAndroid
+import configureKotlinCompose
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
 /**
- * Android Room Convention Plugin
+ * Android Feature UI Convention Plugin
  * 
- * This plugin configures Android library modules with Room database support
+ * This plugin configures feature UI modules with Compose support
  * following our template's conventions and the 20-item checklist.
+ * Used for feature modules that contain UI components.
  */
-class AndroidRoomConventionPlugin : Plugin<Project> {
+class AndroidFeatureUiConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.run {
             pluginManager.run {
                 apply("com.android.library")
                 apply("org.jetbrains.kotlin.android")
-                apply("androidx.room")
+                apply("org.jetbrains.kotlin.plugin.compose")
                 apply("com.google.dagger.hilt.android")
             }
             extensions.configure<LibraryExtension> {
@@ -31,6 +33,7 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
                 }
 
                 configureKotlinAndroid(this)
+                configureKotlinCompose(this)
                 configureBuildTypes(
                     commonExtension = this,
                     extensionType = ExtensionType.LIBRARY

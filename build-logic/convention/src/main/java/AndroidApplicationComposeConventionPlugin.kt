@@ -1,26 +1,28 @@
-package com.androidcleantemplate.convention
+
 
 import com.android.build.api.dsl.ApplicationExtension
-import com.androidcleantemplate.convention.ExtensionType
-import com.androidcleantemplate.convention.configureBuildTypes
-import com.androidcleantemplate.convention.configureKotlinAndroid
+import ExtensionType
+import configureBuildTypes
+import configureKotlinAndroid
+import configureKotlinCompose
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
 /**
- * Android Application Convention Plugin
+ * Android Application Compose Convention Plugin
  * 
- * This plugin configures Android application modules with standard settings
+ * This plugin configures Android application modules with Compose support
  * following our template's conventions and the 20-item checklist.
  */
-class AndroidApplicationConventionPlugin : Plugin<Project> {
+class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.run {
             pluginManager.run {
                 apply("com.android.application")
                 apply("org.jetbrains.kotlin.android")
+                apply("org.jetbrains.kotlin.plugin.compose")
             }
             extensions.configure<ApplicationExtension> {
                 defaultConfig {
@@ -31,6 +33,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 }
 
                 configureKotlinAndroid(this)
+                configureKotlinCompose(this)
                 configureBuildTypes(
                     commonExtension = this,
                     extensionType = ExtensionType.APPLICATION

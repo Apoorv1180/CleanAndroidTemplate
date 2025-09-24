@@ -1,4 +1,4 @@
-package com.androidcleantemplate.convention
+
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

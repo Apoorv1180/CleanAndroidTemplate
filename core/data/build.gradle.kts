@@ -4,6 +4,10 @@ plugins {
     kotlin("kapt")
 }
 
+android {
+    namespace = "com.androidcleantemplate.core.data"
+}
+
 dependencies {
     // Core modules
     implementation(project(":core:domain"))
