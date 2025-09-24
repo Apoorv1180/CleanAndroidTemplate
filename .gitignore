@@ -126,4 +126,38 @@ Thumbs.db
 
 # Project specific - Only include CleanAndroidTemplate project files
 # Exclude any other Android projects or folders
-# Add specific exclusions for other projects if needed
+
+# Exclude RUNIQUE-MASTER project and other external projects
+../Runique-master/
+../Runique-master/**
+../RUNIQUE-MASTER/
+../RUNIQUE-MASTER/**
+../StudioProjects/
+../StudioProjects/**
+
+# Exclude other Android projects in parent directories
+../**/app/
+../**/build/
+../**/gradle/
+../**/settings.gradle.kts
+../**/build.gradle.kts
+../**/gradlew
+../**/gradlew.bat
+../**/local.properties
+
+# Exclude any project files outside CleanAndroidTemplate
+../**/*.iml
+../**/.idea/
+../**/.gradle/
+../**/build/
+../**/captures/
+../**/.externalNativeBuild/
+../**/.cxx/
+
+# Workspace-level exclusions
+../**/analytics/
+../**/auth/
+../**/core/
+../**/run/
+../**/wear/
+../**/build-logic/
