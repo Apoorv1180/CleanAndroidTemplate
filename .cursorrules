@@ -1,0 +1,75 @@
+# Android Clean Template - Cursor AI Rules
+
+## Project Context
+- **Project**: AndroidCleanTemplate
+- **Architecture**: Clean Architecture + MVI
+- **UI Framework**: Jetpack Compose + Material Design 3
+- **Package**: com.androidcleantemplate (to be updated from com.example.cleanandroidtemplate)
+- **Current Phase**: Phase 1 - Foundation Setup
+
+## Development Standards
+
+### Code Style
+- Follow Kotlin coding conventions
+- Use meaningful variable and function names
+- Prefer immutable data classes
+- Use `val` over `var` when possible
+- Follow Clean Architecture principles
+
+### Architecture Rules
+- **UI Layer**: Root-Content pattern, Previews, ObserveAsEvents, No business logic
+- **Domain Layer**: UseCase pattern, Domain models, Repository interfaces, State management
+- **Data Layer**: Coroutines, Flow, Data source separation, Mapper organization
+
+### Compose Guidelines
+- Always include @Preview annotations with light/dark theme variants
+- Use Root-Content pattern with Scaffold
+- Implement proper parameter defaults and content slots
+- Break complex composables into smaller functions
+- Use Material Design 3 components
+
+### Git Workflow
+- Use conventional commit messages: `type(scope): description`
+- Follow semantic versioning
+- Create feature branches from `develop`
+- Use descriptive branch names: `feature/phase-1-foundation`
+
+### Testing
+- Write unit tests for business logic
+- Include UI tests for critical user flows
+- Use proper test naming conventions
+
+### Documentation
+- Include KDoc for public APIs
+- Update README.md for major changes
+- Document architectural decisions
+
+## File Organization
+- Keep related files together
+- Use proper package structure
+- Follow Android project conventions
+- Separate concerns properly
+
+## Dependencies
+- Use version catalog (libs.versions.toml)
+- Keep dependencies up to date
+- Prefer stable versions over alpha/beta
+- Document dependency choices
+
+## Performance
+- Use lazy loading where appropriate
+- Optimize Compose recomposition
+- Follow Android performance best practices
+- Profile and measure performance
+
+## Security
+- Never commit sensitive data
+- Use proper authentication patterns
+- Follow Android security guidelines
+- Validate user inputs
+
+## Error Handling
+- Use Result<T, DataError> wrapper
+- Implement proper error states
+- Provide meaningful error messages
+- Log errors appropriately
